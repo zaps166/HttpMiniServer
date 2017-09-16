@@ -30,6 +30,7 @@
 #include <QFileInfo>
 #include <QDebug>
 #include <QDir>
+#include <QUrl>
 
 HttpClient::HttpClient(const QString &root, QTcpSocket *socket) :
     m_root(root),
@@ -71,7 +72,9 @@ void HttpClient::serveFile()
     if (m_requestedPath.isEmpty())
         return;
 
-    QString path = m_root + m_requestedPath;
+    const QUrl url(m_root + m_requestedPath);
+
+    QString path = url.path();
     while (path.endsWith("//"))
         path.chop(1);
     if (QFileInfo(path).isDir())
