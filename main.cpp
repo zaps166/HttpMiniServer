@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
     installSignalHandler();
 
     app.setApplicationName("HttpMiniServer");
-    app.setApplicationVersion("v0.2");
+    app.setApplicationVersion("v0.3");
     app.setOrganizationName("z166");
 
     QCommandLineParser parser;
