@@ -96,20 +96,15 @@ int main(int argc, char *argv[])
         qDebug() << "Root directory doesn't exist!";
         return -1;
     }
-    if (port < 1024)
-    {
-        qDebug() << "Incorrect port, please set port from range [1024-65535]!";
-        return -2;
-    }
 
     HttpServer server(rootFileInfo.absolutePath());
     if (!server.listen(localOnly ? QHostAddress::LocalHost : QHostAddress::Any, port))
     {
-        qDebug() << "Can't start server for given port!";
+        qDebug() << "Can't start server on given port!";
         return -3;
     }
 
-    qDebug().nospace() << "Server started at port: " << port << ", root: " << rootFileInfo.absolutePath();
+    qDebug().nospace() << "Server started at port: " << server.serverPort() << ", root: " << rootFileInfo.absolutePath();
 
     return app.exec();
 }
