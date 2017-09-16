@@ -102,8 +102,8 @@ int main(int argc, char *argv[])
         return -2;
     }
 
-    HttpServer server(rootFileInfo.absolutePath(), localOnly);
-    if (!server.listen(QHostAddress::Any, port))
+    HttpServer server(rootFileInfo.absolutePath());
+    if (!server.listen(localOnly ? QHostAddress::LocalHost : QHostAddress::Any, port))
     {
         qDebug() << "Can't start server for given port!";
         return -3;

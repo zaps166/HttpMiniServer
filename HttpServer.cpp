@@ -27,16 +27,12 @@
 
 #include <QTcpSocket>
 
-HttpServer::HttpServer(const QString &root, bool localOnly)
+HttpServer::HttpServer(const QString &root)
 {
     connect(this, &QTcpServer::newConnection, this, [=] {
         while (hasPendingConnections())
         {
-            QTcpSocket *client = nextPendingConnection();
-            if (!localOnly || client->peerAddress().isLoopback())
-                new HttpClient(root, client);
-            else
-                client->deleteLater();
+            new HttpClient(root, nextPendingConnection());
         }
     });
 }

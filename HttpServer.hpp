@@ -32,7 +32,7 @@ class HttpServer : public QTcpServer
     Q_OBJECT
 
 public:
-    HttpServer(const QString &root, bool localOnly);
+    HttpServer(const QString &root);
     ~HttpServer();
 };
 
